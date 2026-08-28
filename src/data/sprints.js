@@ -100,7 +100,48 @@ export const SPRINTS = [
         consigne:
           "Dans une conversation aujourd'hui, reformule ce que l'autre vient de dire avant de répondre.",
       },
-      // ... jours 2-7 à compléter
+      {
+        jour: 2,
+        type: 'mission',
+        titre: 'Ne pas préparer sa réponse',
+        consigne:
+          "Pendant que quelqu'un te parle aujourd'hui, résiste à l'envie de préparer ta réponse dans ta tête. Écoute juste jusqu'au bout, puis réfléchis.",
+      },
+      {
+        jour: 3,
+        type: 'mission',
+        titre: 'Laisser le silence',
+        consigne:
+          "Après que l'autre a fini de parler, compte trois secondes dans ta tête avant de répondre, au lieu de combler tout de suite.",
+      },
+      {
+        jour: 4,
+        type: 'mission',
+        titre: 'Poser une question ouverte',
+        consigne:
+          "Dans une conversation, pose une question qui ne se répond pas par oui ou non, du style « Qu'est-ce qui t'a fait penser ça ? »",
+      },
+      {
+        jour: 5,
+        type: 'mission',
+        titre: 'Écouter ce qui n\'est pas dit',
+        consigne:
+          "Repère aujourd'hui un ton, une hésitation ou un silence qui en dit plus long que les mots eux-mêmes. Ne dis rien, remarque-le juste.",
+      },
+      {
+        jour: 6,
+        type: 'mission',
+        titre: 'Ranger le téléphone',
+        consigne:
+          "Choisis une conversation aujourd'hui où tu poses ton téléphone, hors de vue, du début à la fin. Sans exception.",
+      },
+      {
+        jour: 7,
+        type: 'mission',
+        titre: 'Bilan de la semaine',
+        consigne:
+          "Repense à un moment cette semaine où tu as vraiment écouté quelqu'un, pas juste entendu. Note-le en une phrase.",
+      },
     ],
   },
 ];
