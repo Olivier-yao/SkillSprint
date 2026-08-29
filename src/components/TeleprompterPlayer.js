@@ -131,14 +131,20 @@ export default function TeleprompterPlayer({
     }
   }, [phase]);
 
-  const demarrerLecture = () => {
-    setPhase('lecture');
-    demarrerEnregistrement();
-    const distance = Math.max(textHeightRef.current - BAND_HEIGHT, 200);
-    const dureeBase = distance * 34; // ms par pixel, ajusté par la vitesse
+  const distanceTotale = () => Math.max(textHeightRef.current - BAND_HEIGHT, 200);
+
+  // Lance (ou relance) le défilement du point où il en est jusqu'à la fin,
+  // à la vitesse donnée. Utilisé au démarrage, à la reprise après pause,
+  // et à chaque changement de vitesse pendant la lecture — sans ça, changer
+  // la vitesse en cours de route n'avait aucun effet sur l'animation déjà
+  // lancée (sa durée est fixée une fois pour toutes par Animated.timing).
+  const continuerVersLaFin = (vitesseUtilisee) => {
+    animationRef.current && animationRef.current.stop();
+    const distance = distanceTotale();
+    const distanceRestante = Math.abs(scrollY._value + distance);
     animationRef.current = Animated.timing(scrollY, {
       toValue: -distance,
-      duration: dureeBase / vitesse,
+      duration: (distanceRestante * 34) / vitesseUtilisee,
       easing: Easing.linear,
       useNativeDriver: true,
     });
@@ -149,6 +155,12 @@ export default function TeleprompterPlayer({
         onTermine && onTermine();
       }
     });
+  };
+
+  const demarrerLecture = () => {
+    setPhase('lecture');
+    demarrerEnregistrement();
+    continuerVersLaFin(vitesse);
   };
 
   const mettreEnPause = () => {
@@ -157,25 +169,8 @@ export default function TeleprompterPlayer({
   };
 
   const reprendre = () => {
-    // Reprend le défilement restant à la vitesse courante
-    const valeurActuelle = scrollY._value;
-    const distanceRestante = Math.abs(
-      valeurActuelle + (textHeightRef.current - BAND_HEIGHT)
-    );
     setPhase('lecture');
-    animationRef.current = Animated.timing(scrollY, {
-      toValue: -(textHeightRef.current - BAND_HEIGHT),
-      duration: (distanceRestante * 34) / vitesse,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    });
-    animationRef.current.start(({ finished }) => {
-      if (finished) {
-        setPhase('termine');
-        arreterEnregistrement();
-        onTermine && onTermine();
-      }
-    });
+    continuerVersLaFin(vitesse);
   };
 
   const recommencer = () => {
@@ -187,7 +182,13 @@ export default function TeleprompterPlayer({
   };
 
   const ajusterVitesse = (delta) => {
-    setVitesse((v) => Math.min(1.6, Math.max(0.6, +(v + delta).toFixed(1))));
+    setVitesse((v) => {
+      const nouvelleVitesse = Math.min(1.6, Math.max(0.6, +(v + delta).toFixed(1)));
+      if (phase === 'lecture') {
+        continuerVersLaFin(nouvelleVitesse);
+      }
+      return nouvelleVitesse;
+    });
   };
 
   return (
