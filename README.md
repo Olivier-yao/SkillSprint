@@ -28,7 +28,7 @@ skillsprint/
 │   ├── theme/theme.js             # couleurs, typographie, espacements
 │   ├── data/sprints.js            # contenu éditorial des sprints (à enrichir)
 │   ├── components/
-│   │   ├── ProgressDots.js
+│   │   ├── ProgressRing.js
 │   │   └── TeleprompterPlayer.js  # composant clé de lecture vocale
 │   └── screens/
 │       ├── HomeScreen.js
@@ -69,3 +69,13 @@ tester dans le navigateur.
    suppose de persister `ressenti` + `reflexion` par jour (actuellement
    `marquerJourComplete` dans App.js ne garde que `jourActuel`, le reste est
    jeté). Chantier de données + écran, à cadrer avant de lancer.
+8. ~~Refonte de l'identité visuelle~~ — fait. La première identité (fond
+   encre bleu-nuit, ambre/teal, Fraunces/Work Sans/Literata) a été jugée
+   trop générique. Remplacée par la direction "Graphique audacieux" choisie
+   parmi 3 propositions : fond presque-blanc, indigo saturé (`#362FE0`) en
+   accent principal, orange (`#E0592A`) pour le jour en cours, typographie
+   Bricolage Grotesque (titres) + Archivo (corps), cartes en blocs pleins ou
+   bordés (2px, coins peu arrondis), anneaux de progression SVG
+   (`ProgressRing`) à la place des points. Le télé-prompteur garde son fond
+   sombre en "spotlight" volontaire, avec une bande de surlignage indigo
+   pleine largeur au lieu des repères latéraux.

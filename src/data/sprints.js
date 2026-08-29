@@ -16,7 +16,6 @@ export const SPRINTS = [
     description:
       "7 jours pour muscler ta voix : diction, rythme, respiration et gestion du stress avant de parler.",
     duree: 7,
-    couleurAccent: 'accentAmber',
     jours: [
       {
         jour: 1,
@@ -91,7 +90,6 @@ export const SPRINTS = [
     categorie: 'Communication',
     description: "7 jours pour vraiment écouter, au-delà des mots.",
     duree: 7,
-    couleurAccent: 'accentTeal',
     jours: [
       {
         jour: 1,

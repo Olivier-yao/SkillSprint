@@ -38,13 +38,13 @@ export default function DayScreen({ route, onCompleter }) {
                 onPress={() => setRessenti(r)}
                 style={[
                   styles.tag,
-                  ressenti === r && { backgroundColor: colors.accentAmber },
+                  ressenti === r && { backgroundColor: colors.accentIndigo, borderColor: colors.accentIndigo },
                 ]}
               >
                 <Text
                   style={[
                     styles.tagTexte,
-                    ressenti === r && { color: colors.bgDeep },
+                    ressenti === r && { color: colors.surface },
                   ]}
                 >
                   {r}
@@ -77,21 +77,21 @@ export default function DayScreen({ route, onCompleter }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bgDeep,
+    backgroundColor: colors.bg,
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.xxl,
   },
   eyebrow: {
-    fontFamily: typography.bodyMedium,
-    color: colors.accentAmber,
-    fontSize: 13,
+    fontFamily: typography.bodyBold,
+    color: colors.accentIndigo,
+    fontSize: 12,
     textTransform: 'uppercase',
     letterSpacing: 1,
   },
   titre: {
     fontFamily: typography.display,
-    color: colors.textPrimary,
-    fontSize: 26,
+    color: colors.ink,
+    fontSize: 24,
     marginTop: spacing.xs,
     marginBottom: spacing.md,
   },
@@ -106,8 +106,8 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
   reflexionLabel: {
-    fontFamily: typography.bodyMedium,
-    color: colors.textPrimary,
+    fontFamily: typography.bodySemiBold,
+    color: colors.ink,
     fontSize: 15,
   },
   ressentisRow: {
@@ -118,33 +118,37 @@ const styles = StyleSheet.create({
   tag: {
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.md,
-    borderRadius: radius.pill,
+    borderRadius: radius.md,
+    borderWidth: 2,
+    borderColor: colors.ink,
     backgroundColor: colors.surface,
   },
   tagTexte: {
-    fontFamily: typography.bodyMedium,
-    color: colors.textPrimary,
+    fontFamily: typography.bodySemiBold,
+    color: colors.ink,
     fontSize: 13,
   },
   input: {
     backgroundColor: colors.surface,
     borderRadius: radius.md,
+    borderWidth: 2,
+    borderColor: colors.divider,
     padding: spacing.md,
-    color: colors.textPrimary,
+    color: colors.ink,
     fontFamily: typography.body,
     fontSize: 14,
     minHeight: 60,
     textAlignVertical: 'top',
   },
   boutonValider: {
-    backgroundColor: colors.accentTeal,
+    backgroundColor: colors.accentIndigo,
     paddingVertical: spacing.md,
-    borderRadius: radius.pill,
+    borderRadius: radius.md,
     alignItems: 'center',
   },
   boutonValiderTexte: {
-    fontFamily: typography.bodySemiBold,
-    color: colors.bgDeep,
+    fontFamily: typography.bodyBold,
+    color: colors.surface,
     fontSize: 15,
   },
 });

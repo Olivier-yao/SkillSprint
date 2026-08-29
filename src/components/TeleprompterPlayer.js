@@ -197,6 +197,9 @@ export default function TeleprompterPlayer({
       )}
 
       <View style={styles.promptContainer}>
+        {/* Bande de surlignage indigo derrière la ligne en cours de lecture */}
+        <View style={styles.bandeSurlignage} pointerEvents="none" />
+
         <Animated.View style={{ transform: [{ translateY: scrollY }] }}>
           <View style={{ height: CONTAINER_HEIGHT / 2 - BAND_HEIGHT / 2 }} />
           <View
@@ -220,19 +223,15 @@ export default function TeleprompterPlayer({
 
         {/* Voiles de dégradé haut/bas pour assombrir hors de la bande de focus */}
         <LinearGradient
-          colors={[colors.bgDeep, 'transparent']}
+          colors={[colors.ink, 'transparent']}
           style={[styles.voile, { top: 0, height: (CONTAINER_HEIGHT - BAND_HEIGHT) / 2 }]}
           pointerEvents="none"
         />
         <LinearGradient
-          colors={['transparent', colors.bgDeep]}
+          colors={['transparent', colors.ink]}
           style={[styles.voile, { bottom: 0, height: (CONTAINER_HEIGHT - BAND_HEIGHT) / 2 }]}
           pointerEvents="none"
         />
-
-        {/* Bande de focus — repères latéraux, sans ligne en travers du texte */}
-        <View style={[styles.repereFocus, styles.repereFocusGauche]} pointerEvents="none" />
-        <View style={[styles.repereFocus, styles.repereFocusDroit]} pointerEvents="none" />
       </View>
 
       {phase === 'respiration' && (
@@ -300,26 +299,24 @@ export default function TeleprompterPlayer({
 const styles = StyleSheet.create({
   wrapper: { width: '100%' },
   focusLabel: {
-    fontFamily: typography.bodyMedium,
-    color: colors.accentAmber,
-    fontSize: 13,
+    fontFamily: typography.bodyBold,
+    color: colors.accentIndigo,
+    fontSize: 12,
     marginBottom: spacing.sm,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   promptContainer: {
     height: CONTAINER_HEIGHT,
-    borderRadius: radius.lg,
-    backgroundColor: colors.bgDeep,
+    borderRadius: radius.md,
+    backgroundColor: colors.ink,
     overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: colors.divider,
   },
   readingText: {
     fontFamily: typography.reading,
-    fontSize: 26,
-    lineHeight: 40,
-    color: colors.textPrimary,
+    fontSize: 22,
+    lineHeight: 34,
+    color: colors.surface,
     textAlign: 'center',
     paddingHorizontal: spacing.lg,
   },
@@ -328,16 +325,14 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  repereFocus: {
+  bandeSurlignage: {
     position: 'absolute',
+    left: 0,
+    right: 0,
     top: CONTAINER_HEIGHT / 2 - BAND_HEIGHT / 2,
     height: BAND_HEIGHT,
-    width: 3,
-    borderRadius: 2,
-    backgroundColor: colors.accentAmberDim,
+    backgroundColor: colors.accentIndigo,
   },
-  repereFocusGauche: { left: spacing.sm },
-  repereFocusDroit: { right: spacing.sm },
   respirationBloc: {
     alignItems: 'center',
     marginTop: spacing.lg,
@@ -347,7 +342,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 10,
-    backgroundColor: colors.accentTeal,
+    backgroundColor: colors.accentIndigo,
   },
   respirationTexte: {
     fontFamily: typography.body,
@@ -369,32 +364,34 @@ const styles = StyleSheet.create({
   boutonRond: {
     width: 36,
     height: 36,
-    borderRadius: 18,
-    backgroundColor: colors.surfaceRaised,
+    borderRadius: radius.md,
+    borderWidth: 2,
+    borderColor: colors.ink,
+    backgroundColor: colors.surface,
     alignItems: 'center',
     justifyContent: 'center',
   },
   boutonRondTexte: {
-    color: colors.textPrimary,
+    color: colors.ink,
     fontSize: 18,
-    fontFamily: typography.bodySemiBold,
+    fontFamily: typography.bodyBold,
   },
   vitesseTexte: {
-    fontFamily: typography.bodyMedium,
+    fontFamily: typography.bodyBold,
     color: colors.textMuted,
     fontSize: 14,
     minWidth: 100,
     textAlign: 'center',
   },
   boutonPrincipal: {
-    backgroundColor: colors.accentAmber,
+    backgroundColor: colors.accentIndigo,
     paddingVertical: spacing.md,
     paddingHorizontal: spacing.xl,
-    borderRadius: radius.pill,
+    borderRadius: radius.md,
   },
   boutonPrincipalTexte: {
-    fontFamily: typography.bodySemiBold,
-    color: colors.bgDeep,
+    fontFamily: typography.bodyBold,
+    color: colors.surface,
     fontSize: 15,
   },
   boutonSecondaire: {
@@ -402,8 +399,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
   },
   boutonSecondaireTexte: {
-    fontFamily: typography.bodyMedium,
-    color: colors.accentTeal,
+    fontFamily: typography.bodyBold,
+    color: colors.accentIndigo,
     fontSize: 14,
   },
 });

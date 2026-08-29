@@ -1,9 +1,17 @@
 import React, { useState, useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useFonts, Fraunces_600SemiBold, Fraunces_500Medium_Italic } from '@expo-google-fonts/fraunces';
-import { WorkSans_400Regular, WorkSans_500Medium, WorkSans_600SemiBold } from '@expo-google-fonts/work-sans';
-import { Literata_400Regular, Literata_500Medium } from '@expo-google-fonts/literata';
+import {
+  useFonts,
+  BricolageGrotesque_600SemiBold,
+  BricolageGrotesque_800ExtraBold,
+} from '@expo-google-fonts/bricolage-grotesque';
+import {
+  Archivo_400Regular,
+  Archivo_500Medium,
+  Archivo_600SemiBold,
+  Archivo_700Bold,
+} from '@expo-google-fonts/archivo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import HomeScreen from './src/screens/HomeScreen';
@@ -16,13 +24,12 @@ const STORAGE_KEY = '@skillsprint_progression';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Fraunces_600SemiBold,
-    Fraunces_500Medium_Italic,
-    WorkSans_400Regular,
-    WorkSans_500Medium,
-    WorkSans_600SemiBold,
-    Literata_400Regular,
-    Literata_500Medium,
+    BricolageGrotesque_600SemiBold,
+    BricolageGrotesque_800ExtraBold,
+    Archivo_400Regular,
+    Archivo_500Medium,
+    Archivo_600SemiBold,
+    Archivo_700Bold,
   });
 
   const [progression, setProgression] = useState({});
@@ -55,14 +62,14 @@ export default function App() {
   return (
     <NavigationContainer
       theme={{
-        dark: true,
+        dark: false,
         colors: {
-          background: colors.bgDeep,
-          card: colors.bgDeep,
-          text: colors.textPrimary,
+          background: colors.bg,
+          card: colors.bg,
+          text: colors.ink,
           border: colors.divider,
-          primary: colors.accentAmber,
-          notification: colors.accentCoral,
+          primary: colors.accentIndigo,
+          notification: colors.accentOrange,
         },
       }}
     >

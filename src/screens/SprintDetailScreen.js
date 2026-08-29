@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native';
 import { getSprintById } from '../data/sprints';
-import ProgressDots from '../components/ProgressDots';
+import ProgressRing from '../components/ProgressRing';
 import { colors, typography, spacing, radius } from '../theme/theme';
 
 export default function SprintDetailScreen({ route, navigation, progression = {}, onRefaireSprint }) {
@@ -17,11 +17,7 @@ export default function SprintDetailScreen({ route, navigation, progression = {}
       <Text style={styles.description}>{sprint.description}</Text>
 
       <View style={styles.progressionBloc}>
-        <ProgressDots
-          total={sprint.duree}
-          jourActuel={jourActuel}
-          accent={sprint.couleurAccent}
-        />
+        <ProgressRing progression={jourActuel / sprint.duree} size={44} strokeWidth={5} />
         <Text style={styles.progressionTexte}>
           {jourActuel}/{sprint.duree} jours complétés
         </Text>
@@ -58,16 +54,24 @@ export default function SprintDetailScreen({ route, navigation, progression = {}
           const etat = index < jourActuel ? 'fait' : index === jourActuel ? 'actuel' : 'a_venir';
           return (
             <View key={jour.jour} style={styles.jourLigne}>
-              <Text
+              <View
                 style={[
-                  styles.jourNumero,
-                  etat === 'fait' && { color: colors.accentTeal },
-                  etat === 'actuel' && { color: colors.accentAmber },
-                  etat === 'a_venir' && { color: colors.textMuted, opacity: 0.5 },
+                  styles.jourPuce,
+                  etat === 'fait' && { backgroundColor: colors.accentIndigo, borderColor: colors.accentIndigo },
+                  etat === 'actuel' && { backgroundColor: colors.accentOrange, borderColor: colors.accentOrange },
+                  etat === 'a_venir' && { borderColor: colors.divider },
                 ]}
               >
-                {jour.jour}
-              </Text>
+                <Text
+                  style={[
+                    styles.jourPuceTexte,
+                    (etat === 'fait' || etat === 'actuel') && { color: colors.surface },
+                    etat === 'a_venir' && { color: colors.textMuted },
+                  ]}
+                >
+                  {jour.jour}
+                </Text>
+              </View>
               <Text
                 style={[
                   styles.jourTitre,
@@ -88,21 +92,21 @@ export default function SprintDetailScreen({ route, navigation, progression = {}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bgDeep,
+    backgroundColor: colors.bg,
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.xxl,
   },
   categorie: {
-    fontFamily: typography.bodyMedium,
-    color: colors.accentAmber,
-    fontSize: 13,
+    fontFamily: typography.bodyBold,
+    color: colors.accentIndigo,
+    fontSize: 12,
     textTransform: 'uppercase',
     letterSpacing: 1,
   },
   titre: {
     fontFamily: typography.display,
-    color: colors.textPrimary,
-    fontSize: 30,
+    color: colors.ink,
+    fontSize: 26,
     marginTop: spacing.xs,
   },
   description: {
@@ -114,28 +118,32 @@ const styles = StyleSheet.create({
   },
   progressionBloc: {
     marginTop: spacing.xl,
-    gap: spacing.sm,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
   },
   progressionTexte: {
-    fontFamily: typography.bodyMedium,
+    fontFamily: typography.bodyBold,
     color: colors.textMuted,
     fontSize: 13,
   },
   boutonPrincipal: {
     marginTop: spacing.xl,
-    backgroundColor: colors.accentAmber,
+    backgroundColor: colors.accentIndigo,
     paddingVertical: spacing.md,
-    borderRadius: radius.pill,
+    borderRadius: radius.md,
     alignItems: 'center',
   },
   boutonPrincipalTexte: {
-    fontFamily: typography.bodySemiBold,
-    color: colors.bgDeep,
+    fontFamily: typography.bodyBold,
+    color: colors.surface,
     fontSize: 15,
   },
   termineBloc: {
     marginTop: spacing.xl,
     backgroundColor: colors.surface,
+    borderWidth: 2,
+    borderColor: colors.ink,
     borderRadius: radius.md,
     padding: spacing.lg,
   },
@@ -147,41 +155,48 @@ const styles = StyleSheet.create({
   boutonRefaire: {
     marginTop: spacing.md,
     alignSelf: 'flex-start',
-    borderWidth: 1,
-    borderColor: colors.accentAmber,
+    borderWidth: 2,
+    borderColor: colors.ink,
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.lg,
-    borderRadius: radius.pill,
+    borderRadius: radius.md,
   },
   boutonRefaireTexte: {
-    fontFamily: typography.bodySemiBold,
-    color: colors.accentAmber,
+    fontFamily: typography.bodyBold,
+    color: colors.ink,
     fontSize: 14,
   },
   joursLabel: {
-    fontFamily: typography.bodyMedium,
+    fontFamily: typography.bodyBold,
     color: colors.textMuted,
     fontSize: 12,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
     marginTop: spacing.xl,
-    marginBottom: spacing.sm,
-    borderTopWidth: 1,
-    borderTopColor: colors.divider,
+    marginBottom: spacing.md,
+    borderTopWidth: 2,
+    borderTopColor: colors.ink,
     paddingTop: spacing.lg,
   },
   joursListe: {
-    gap: spacing.md,
+    gap: spacing.sm,
   },
   jourLigne: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.md,
   },
-  jourNumero: {
-    fontFamily: typography.bodySemiBold,
-    fontSize: 14,
-    width: 20,
+  jourPuce: {
+    width: 26,
+    height: 26,
+    borderRadius: radius.sm,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  jourPuceTexte: {
+    fontFamily: typography.bodyBold,
+    fontSize: 12,
   },
   jourTitre: {
     fontFamily: typography.body,
@@ -191,6 +206,6 @@ const styles = StyleSheet.create({
   },
   jourTitreActuel: {
     fontFamily: typography.bodySemiBold,
-    color: colors.textPrimary,
+    color: colors.ink,
   },
 });

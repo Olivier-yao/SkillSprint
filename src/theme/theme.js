@@ -1,29 +1,30 @@
 // theme.js — Système de design SkillSprint
-// Palette pensée comme une "salle d'entraînement" calme : fond encre profonde,
-// accent ambre pour la progression, teal pour la validation, corail réservé
-// aux signaux de stress/attention (utilisé avec parcimonie).
+// Direction "Graphique audacieux" : fond presque-blanc, encre quasi-noire,
+// indigo saturé en accent principal (CTA, progression, marque), orange brûlé
+// réservé à la mise en avant du jour en cours. Cartes en blocs pleins ou
+// bordés — pas de soft-UI, la hiérarchie vient du contraste et du poids
+// typographique.
 
 export const colors = {
-  bgDeep: '#1B1F2A',       // fond principal
-  surface: '#242A3B',      // cartes
-  surfaceRaised: '#2E3548',// cartes surélevées / modales
-  textPrimary: '#F3EFE7',  // texte principal (blanc chaud papier)
-  textMuted: '#9AA1B4',    // texte secondaire
-  accentAmber: '#E8A23C',  // CTA principal, progression
-  accentAmberDim: '#7A5A2C',
-  accentTeal: '#5FBFA0',   // validation, complété, calme
-  accentCoral: '#E2705F',  // stress / attention, usage rare
-  divider: '#333A4E',
+  bg: '#F3F2EE',            // fond principal
+  surface: '#FFFFFF',       // cartes
+  surfaceRaised: '#EDEBE4', // éléments surélevés (pastilles, champs)
+  ink: '#14151A',           // texte principal
+  textMuted: '#55524C',     // texte secondaire
+  accentIndigo: '#362FE0',  // marque, CTA principal, progression, validation
+  accentIndigoSoft: '#E3E1FB', // fond doux sur accent indigo
+  accentOrange: '#E0592A',  // mise en avant du jour en cours, usage ciblé
+  divider: '#E4E2DC',
 };
 
 export const typography = {
-  display: 'Fraunces_600SemiBold',   // titres, numéros de jour
-  displayItalic: 'Fraunces_500Medium_Italic',
-  body: 'WorkSans_400Regular',
-  bodyMedium: 'WorkSans_500Medium',
-  bodySemiBold: 'WorkSans_600SemiBold',
-  reading: 'Literata_400Regular',    // texte du télé-prompteur (lecture longue)
-  readingMedium: 'Literata_500Medium',
+  display: 'BricolageGrotesque_800ExtraBold', // titres, marque
+  displaySemiBold: 'BricolageGrotesque_600SemiBold',
+  body: 'Archivo_400Regular',
+  bodyMedium: 'Archivo_500Medium',
+  bodySemiBold: 'Archivo_600SemiBold',
+  bodyBold: 'Archivo_700Bold',
+  reading: 'BricolageGrotesque_800ExtraBold', // texte du télé-prompteur
 };
 
 export const spacing = {
@@ -36,10 +37,9 @@ export const spacing = {
 };
 
 export const radius = {
-  sm: 8,
-  md: 14,
-  lg: 22,
-  pill: 999,
+  sm: 4,
+  md: 8,
+  lg: 16,
 };
 
 export default { colors, typography, spacing, radius };
