@@ -125,5 +125,14 @@ tester dans le navigateur.
 10. ~~Nouveau sprint "Respiration & Ancrage"~~ — fait. Troisième compétence
     (catégorie "Gestion du stress", évoquée comme "bientôt" dans les
     maquettes) : respiration carrée, ancrage par les sens, dialogue
-    intérieur, plan anti-tension — 4 jours télé-prompteur / 3 jours
+    intérieur, plan anti-tension — 3 jours télé-prompteur / 4 jours
     mission, même structure éditoriale que les deux sprints existants.
+11. ~~Textes du télé-prompteur rallongés~~ — fait. Retour utilisateur :
+    trop courts par rapport à ce qu'annonce l'accueil ("environ 5
+    minutes"). Les 7 textes existants sont ~4x plus longs, même
+    ton/thème par jour.
+12. ~~Nouveau sprint "Focus & Discipline"~~ — fait. Quatrième compétence
+    (catégorie "Concentration") : une tâche à la fois, se recentrer,
+    couper les notifications, tenir jusqu'au bout, règle des cinq
+    minutes, ranger son espace — 2 jours télé-prompteur / 5 jours
+    mission.

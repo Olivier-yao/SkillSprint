@@ -213,6 +213,73 @@ export const SPRINTS = [
       },
     ],
   },
+  {
+    id: 'focus-discipline',
+    titre: 'Focus & Discipline',
+    categorie: 'Concentration',
+    description:
+      "7 jours pour muscler ta concentration : couper les distractions, tenir un cap, et retrouver le plaisir de finir ce que tu commences.",
+    duree: 7,
+    jours: [
+      {
+        jour: 1,
+        type: 'mission',
+        titre: 'Une seule tâche à la fois',
+        consigne:
+          "Aujourd'hui, choisis une tâche importante et fais-la sans rien ouvrir d'autre — pas d'onglet, pas de notification, pas de téléphone — pendant 10 minutes d'affilée.",
+      },
+      {
+        jour: 2,
+        type: 'teleprompter',
+        titre: 'Se recentrer',
+        focus: 'Revenir à l\'instant présent, encore et encore',
+        consigne:
+          "Lis lentement. Chaque fois que le texte te fait remarquer que ton attention est partie, c'est exactement l'exercice.",
+        text:
+          "Mon attention part, / encore. // Elle va voir ailleurs, / une pensée, / une envie de vérifier mon téléphone, / un bruit dans la pièce. // Ce n'est pas un échec. / C'est juste ce que fait une attention, / naturellement. // Je la remarque, / sans me juger, / et je la ramène, / doucement, / vers ce que je suis en train de faire. // Une tâche à la fois. / Une phrase à la fois. / Un mot à la fois. // Je n'ai pas besoin d'être concentré·e parfaitement / pendant des heures. // J'ai juste besoin de revenir, / une fois de plus, / chaque fois que je pars. // C'est ça, / la concentration : / pas l'absence de distraction, / mais le geste de revenir, / répété, / patiemment. // Je respire, / je repose les yeux sur ce qui compte, / et je continue, / un peu plus loin qu'avant.",
+        vitesseParDefaut: 0.9,
+      },
+      {
+        jour: 3,
+        type: 'mission',
+        titre: 'Couper les notifications',
+        consigne:
+          "Mets ton téléphone en mode avion ou « ne pas déranger » pendant une heure de travail aujourd'hui. Observe ce que ça change.",
+      },
+      {
+        jour: 4,
+        type: 'teleprompter',
+        titre: 'Tenir jusqu\'au bout',
+        focus: 'Aller au bout d\'une chose avant d\'en commencer une autre',
+        consigne:
+          "Lis ce texte sans t'arrêter, même si l'envie de faire autre chose te vient. C'est exactement ce dont il parle.",
+        text:
+          "J'ai envie de tout commencer, / et de ne rien finir. // Une nouvelle idée arrive, / plus excitante que celle d'hier, / et je veux déjà sauter dessus. // Mais aujourd'hui, / je choisis de rester. // Je finis ce que j'ai commencé, / même si c'est moins excitant maintenant / que ça l'était au début. // Le début est facile. / Tout le monde aime les débuts. // C'est le milieu qui est difficile, / cette partie où l'enthousiasme est parti / mais le travail n'est pas fini. // Je reste, / un peu plus longtemps que ce qui est confortable. // Pas éternellement, / juste un peu plus. // Chaque fois que je vais jusqu'au bout d'une chose, / même petite, / j'apprends à me faire confiance. // Je peux commencer une nouvelle idée demain. / Aujourd'hui, / je finis celle-ci.",
+        vitesseParDefaut: 0.9,
+      },
+      {
+        jour: 5,
+        type: 'mission',
+        titre: 'La règle des cinq minutes',
+        consigne:
+          "Quand tu repousses une tâche aujourd'hui, dis-toi que tu vas juste faire cinq minutes. Souvent, tu continueras après — et sinon, cinq minutes, c'est déjà ça.",
+      },
+      {
+        jour: 6,
+        type: 'mission',
+        titre: 'Ranger son espace de travail',
+        consigne:
+          "Avant de commencer à travailler aujourd'hui, dégage ton espace : range ce qui traîne, ferme les onglets inutiles. Un espace clair, une tête plus claire.",
+      },
+      {
+        jour: 7,
+        type: 'mission',
+        titre: 'Bilan de la semaine',
+        consigne:
+          "Repense à un moment cette semaine où tu es resté·e concentré·e plus longtemps que d'habitude. Note-le en une phrase.",
+      },
+    ],
+  },
 ];
 
 export function getSprintById(id) {
