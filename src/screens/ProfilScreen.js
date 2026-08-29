@@ -19,7 +19,7 @@ function statutSprint(jourActuel, duree) {
   return `En cours · jour ${jourActuel}`;
 }
 
-export default function ProfilScreen({ progression = {} }) {
+export default function ProfilScreen({ navigation, progression = {} }) {
   const joursEntraines = SPRINTS.reduce(
     (total, sprint) => total + (progression[sprint.id]?.jourActuel || 0),
     0
@@ -132,7 +132,10 @@ export default function ProfilScreen({ progression = {} }) {
       renderItem={({ item }) => {
         const jourActuel = progression[item.id]?.jourActuel || 0;
         return (
-          <View style={styles.carte}>
+          <Pressable
+            style={styles.carte}
+            onPress={() => navigation.navigate('Historique', { sprintId: item.id })}
+          >
             <View style={styles.carteHaut}>
               <View style={{ flex: 1 }}>
                 <Text style={styles.categorie}>{item.categorie}</Text>
@@ -141,7 +144,8 @@ export default function ProfilScreen({ progression = {} }) {
               </View>
               <ProgressRing progression={jourActuel / item.duree} size={44} strokeWidth={5} />
             </View>
-          </View>
+            <Text style={styles.lienRessentis}>Voir mes ressentis</Text>
+          </Pressable>
         );
       }}
     />
@@ -257,5 +261,11 @@ const styles = StyleSheet.create({
     color: colors.accentIndigo,
     fontSize: 12,
     marginTop: spacing.xs,
+  },
+  lienRessentis: {
+    fontFamily: typography.bodyBold,
+    color: colors.accentIndigo,
+    fontSize: 12,
+    marginTop: spacing.md,
   },
 });

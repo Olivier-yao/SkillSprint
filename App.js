@@ -21,10 +21,12 @@ import HomeScreen from './src/screens/HomeScreen';
 import SprintDetailScreen from './src/screens/SprintDetailScreen';
 import DayScreen from './src/screens/DayScreen';
 import ProfilScreen from './src/screens/ProfilScreen';
+import HistoriqueScreen from './src/screens/HistoriqueScreen';
 import { IconAccueil, IconProfil } from './src/components/icons';
 import { colors, typography } from './src/theme/theme';
 
 const AccueilStack = createNativeStackNavigator();
+const ProfilStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const RootStack = createNativeStackNavigator();
 
@@ -52,15 +54,28 @@ function AccueilStackScreen({ progression, onCompleter, onRefaireSprint, sprintI
         {(props) => (
           <DayScreen
             {...props}
-            onCompleter={({ jour }) => {
+            onCompleter={({ jour, ressenti, reflexion }) => {
               const { sprintId } = props.route.params;
-              onCompleter(sprintId, jour);
+              onCompleter(sprintId, jour, ressenti, reflexion);
               props.navigation.navigate('SprintDetail', { sprintId });
             }}
           />
         )}
       </AccueilStack.Screen>
     </AccueilStack.Navigator>
+  );
+}
+
+function ProfilStackScreen({ progression }) {
+  return (
+    <ProfilStack.Navigator screenOptions={{ headerShown: false }}>
+      <ProfilStack.Screen name="Profil">
+        {(props) => <ProfilScreen {...props} progression={progression} />}
+      </ProfilStack.Screen>
+      <ProfilStack.Screen name="Historique">
+        {(props) => <HistoriqueScreen {...props} progression={progression} />}
+      </ProfilStack.Screen>
+    </ProfilStack.Navigator>
   );
 }
 
@@ -99,7 +114,7 @@ function MainTabs({ progression, onCompleter, onRefaireSprint, sprintInitial }) 
         name="Profil"
         options={{ tabBarIcon: ({ color }) => <IconProfil color={color} /> }}
       >
-        {() => <ProfilScreen progression={progression} />}
+        {() => <ProfilStackScreen progression={progression} />}
       </Tab.Screen>
     </Tab.Navigator>
   );
@@ -128,10 +143,15 @@ export default function App() {
     });
   }, []);
 
-  const marquerJourComplete = useCallback((sprintId, jourNumero) => {
+  const marquerJourComplete = useCallback((sprintId, jourNumero, ressenti, reflexion) => {
     setProgression((prev) => {
       const jourActuel = Math.max(prev[sprintId]?.jourActuel || 0, jourNumero);
-      const next = { ...prev, [sprintId]: { jourActuel } };
+      const historiquePrecedent = prev[sprintId]?.historique || [];
+      const historique = [
+        ...historiquePrecedent.filter((h) => h.jour !== jourNumero),
+        { jour: jourNumero, ressenti, reflexion, date: new Date().toISOString() },
+      ].sort((a, b) => a.jour - b.jour);
+      const next = { ...prev, [sprintId]: { jourActuel, historique } };
       AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       return next;
     });
@@ -139,7 +159,7 @@ export default function App() {
 
   const remettreSprintAZero = useCallback((sprintId) => {
     setProgression((prev) => {
-      const next = { ...prev, [sprintId]: { jourActuel: 0 } };
+      const next = { ...prev, [sprintId]: { jourActuel: 0, historique: [] } };
       AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       return next;
     });

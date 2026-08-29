@@ -71,6 +71,13 @@ tester dans le navigateur.
    réelle (`Notifications.scheduleNotificationAsync`) nécessite un test sur
    appareil, pas encore fait.
 4. Sprints collaboratifs (fonctionnalité "wow" identifiée en discovery).
+   Pas commencé — contrairement au reste de cette liste, ça ne se scope pas
+   sans discussion : l'app est 100% locale aujourd'hui (AsyncStorage, pas de
+   compte, pas de serveur), donc "collaboratif" implique un vrai backend
+   (lequel ?), de l'authentification, et une définition précise de ce que ça
+   veut dire concrètement (même sprint à plusieurs ? comparer sa progression
+   avec des amis ? chat ?). À cadrer avec l'utilisateur avant de coder quoi
+   que ce soit.
 5. ~~Importer les maquettes Claude Design~~ — fait (accès débloqué via export
    HTML manuel de l'utilisateur, cf. commit "Apply Claude Design maquettes").
    Appliqué : accueil (carte "aujourd'hui" + liste), détail sprint (liste des
@@ -84,14 +91,17 @@ tester dans le navigateur.
    `@skillsprint_onboarde`.
 7. ~~Navigation par barre d'onglets~~ — fait. `Accueil` (pile Home →
    SprintDetail → Day, comme avant) et `Profil` (nouvel onglet).
-8. Profil / historique des ressentis — l'onglet `ProfilScreen` actuel est
-   volontairement minimal et honnête : total de jours entraînés + statut par
-   sprint, calculés depuis `progression` (pas de séries/dates inventées, on
-   ne les a pas). Pour aller plus loin (jours consécutifs, historique des
-   ressentis par jour comme en 1o) il faudrait persister `ressenti` +
-   `reflexion` + une date par jour complété — actuellement
-   `marquerJourComplete` dans App.js ne garde que `jourActuel`. Chantier de
-   données à cadrer avant de lancer.
+8. ~~Historique des ressentis~~ — fait. `marquerJourComplete` persiste
+   maintenant `{ jour, ressenti, reflexion, date }` par jour complété (pas
+   seulement `jourActuel`). Nouvel écran `HistoriqueScreen` (maquette 1o),
+   accessible depuis "Voir mes ressentis" sur chaque carte de l'onglet
+   Profil : ressenti + citation par jour fait, "Pas encore fait" pour le
+   reste — pas de série/tendance inventée, juste un décompte honnête
+   ("Nombre de jours notés"). "Refaire le sprint" efface aussi l'historique
+   du sprint (recommencer à zéro, cohérent avec la remise à zéro de
+   `jourActuel`). Toujours pas de jours consécutifs — ça demanderait de
+   comparer des dates d'un jour sur l'autre, pas juste de stocker une date
+   par entrée ; à faire séparément si besoin.
 9. ~~Refonte de l'identité visuelle~~ — fait. La première identité (fond
    encre bleu-nuit, ambre/teal, Fraunces/Work Sans/Literata) a été jugée
    trop générique. Remplacée par la direction "Graphique audacieux" choisie
