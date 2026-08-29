@@ -142,6 +142,77 @@ export const SPRINTS = [
       },
     ],
   },
+  {
+    id: 'respiration-ancrage',
+    titre: 'Respiration & Ancrage',
+    categorie: 'Gestion du stress',
+    description:
+      "7 jours pour retrouver ton calme : respiration, ancrage dans le corps, et un vrai plan pour les moments de tension.",
+    duree: 7,
+    jours: [
+      {
+        jour: 1,
+        type: 'teleprompter',
+        titre: 'Respirer en quatre temps',
+        focus: 'Respiration carrée, quatre temps égaux',
+        consigne:
+          "Suis le rythme : inspire 4 secondes, retiens 4, expire 4, retiens 4. Lis le texte en calant tes mots sur ce rythme, sans te presser.",
+        text:
+          "J'inspire, / je compte jusqu'à quatre. // Je retiens, / un temps de pause. // J'expire, / je laisse partir. // Et je recommence, / aussi souvent qu'il le faut.",
+        vitesseParDefaut: 0.8,
+      },
+      {
+        jour: 2,
+        type: 'mission',
+        titre: 'Nommer ce qui se passe',
+        consigne:
+          "Dès que tu sens une tension monter aujourd'hui, dis-toi intérieurement (ou à voix basse) ce qui se passe : « Je suis stressé·e parce que... ». Nommer, sans juger.",
+      },
+      {
+        jour: 3,
+        type: 'teleprompter',
+        titre: 'Ancrer son corps',
+        focus: 'Ancrage par les sens',
+        consigne:
+          "Pendant que tu lis, sens vraiment tes pieds au sol et tes mains posées. C'est ça, l'ancrage.",
+        text:
+          "Mes pieds touchent le sol. // Mes mains sont posées, / immobiles. // Je sens le poids de mon corps, / ici, / maintenant. // Le stress est dans ma tête, / mon corps, lui, / est déjà calme.",
+        vitesseParDefaut: 0.9,
+      },
+      {
+        jour: 4,
+        type: 'mission',
+        titre: 'Faire une pause de deux minutes',
+        consigne:
+          "Aujourd'hui, dès que tu sens la pression monter, arrête-toi deux minutes. Pas de téléphone, juste respirer. Deux minutes, pas plus, pas moins.",
+      },
+      {
+        jour: 5,
+        type: 'teleprompter',
+        titre: 'Parler à son stress',
+        focus: 'Changer le dialogue intérieur',
+        consigne:
+          "Lis ce texte comme si tu te parlais à toi-même, avec douceur, pas avec dureté.",
+        text:
+          "Mon stress n'est pas mon ennemi. // Il essaie juste de me protéger, / maladroitement. // Je peux lui dire merci, / et respirer quand même. // Je n'ai pas besoin qu'il disparaisse / pour avancer.",
+        vitesseParDefaut: 0.9,
+      },
+      {
+        jour: 6,
+        type: 'mission',
+        titre: 'Préparer son plan anti-tension',
+        consigne:
+          "Note trois choses simples que tu peux faire la prochaine fois que le stress monte (respirer, sortir marcher, appeler quelqu'un...). Garde cette liste à portée de main.",
+      },
+      {
+        jour: 7,
+        type: 'mission',
+        titre: 'Bilan de la semaine',
+        consigne:
+          "Repense à un moment cette semaine où tu as géré ton stress un peu mieux qu'avant. Note-le en une phrase.",
+      },
+    ],
+  },
 ];
 
 export function getSprintById(id) {

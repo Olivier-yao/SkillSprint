@@ -122,3 +122,8 @@ tester dans le navigateur.
    (`ProgressRing`) à la place des points. Le télé-prompteur garde son fond
    sombre en "spotlight" volontaire, avec une bande de surlignage indigo
    pleine largeur au lieu des repères latéraux.
+10. ~~Nouveau sprint "Respiration & Ancrage"~~ — fait. Troisième compétence
+    (catégorie "Gestion du stress", évoquée comme "bientôt" dans les
+    maquettes) : respiration carrée, ancrage par les sens, dialogue
+    intérieur, plan anti-tension — 4 jours télé-prompteur / 3 jours
+    mission, même structure éditoriale que les deux sprints existants.
