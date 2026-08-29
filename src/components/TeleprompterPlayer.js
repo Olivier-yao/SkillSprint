@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { View, Text, StyleSheet, Animated, Pressable, Easing } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Audio } from 'expo-av';
 import { colors, typography, spacing, radius } from '../theme/theme';
 
 // TeleprompterPlayer — élément signature de SkillSprint.
@@ -40,7 +41,71 @@ export default function TeleprompterPlayer({
   const animationRef = useRef(null);
   const textHeightRef = useRef(0);
 
+  // Enregistrement de la lecture, pour se réécouter une fois terminé.
+  // 'indisponible' si le micro n'est pas accessible (permission refusée,
+  // plateforme non supportée) — l'exercice reste utilisable sans.
+  const [enregistrement, setEnregistrement] = useState('inactif'); // 'inactif' | 'en_cours' | 'pret' | 'lecture_audio' | 'indisponible'
+  const recordingRef = useRef(null);
+  const soundRef = useRef(null);
+  const [recordingUri, setRecordingUri] = useState(null);
+
   const segments = useMemo(() => decouperEnSegments(text), [text]);
+
+  useEffect(() => {
+    return () => {
+      recordingRef.current && recordingRef.current.stopAndUnloadAsync().catch(() => {});
+      soundRef.current && soundRef.current.unloadAsync().catch(() => {});
+    };
+  }, []);
+
+  const demarrerEnregistrement = async () => {
+    try {
+      const { granted } = await Audio.requestPermissionsAsync();
+      if (!granted) {
+        setEnregistrement('indisponible');
+        return;
+      }
+      await Audio.setAudioModeAsync({ allowsRecordingIOS: true, playsInSilentModeIOS: true });
+      const { recording } = await Audio.Recording.createAsync(
+        Audio.RecordingOptionsPresets.HIGH_QUALITY
+      );
+      recordingRef.current = recording;
+      setEnregistrement('en_cours');
+    } catch (e) {
+      setEnregistrement('indisponible');
+    }
+  };
+
+  const arreterEnregistrement = async () => {
+    if (!recordingRef.current) return;
+    try {
+      await recordingRef.current.stopAndUnloadAsync();
+      const uri = recordingRef.current.getURI();
+      recordingRef.current = null;
+      setRecordingUri(uri);
+      setEnregistrement('pret');
+    } catch (e) {
+      setEnregistrement('indisponible');
+    }
+  };
+
+  const ecouterEnregistrement = async () => {
+    if (!recordingUri) return;
+    try {
+      setEnregistrement('lecture_audio');
+      const { sound } = await Audio.Sound.createAsync({ uri: recordingUri });
+      soundRef.current = sound;
+      sound.setOnPlaybackStatusUpdate((status) => {
+        if (status.didJustFinish) {
+          setEnregistrement('pret');
+          sound.unloadAsync();
+        }
+      });
+      await sound.playAsync();
+    } catch (e) {
+      setEnregistrement('pret');
+    }
+  };
 
   // Pulsation du point de respiration avant de démarrer
   useEffect(() => {
@@ -68,6 +133,7 @@ export default function TeleprompterPlayer({
 
   const demarrerLecture = () => {
     setPhase('lecture');
+    demarrerEnregistrement();
     const distance = Math.max(textHeightRef.current - BAND_HEIGHT, 200);
     const dureeBase = distance * 34; // ms par pixel, ajusté par la vitesse
     animationRef.current = Animated.timing(scrollY, {
@@ -79,6 +145,7 @@ export default function TeleprompterPlayer({
     animationRef.current.start(({ finished }) => {
       if (finished) {
         setPhase('termine');
+        arreterEnregistrement();
         onTermine && onTermine();
       }
     });
@@ -105,6 +172,7 @@ export default function TeleprompterPlayer({
     animationRef.current.start(({ finished }) => {
       if (finished) {
         setPhase('termine');
+        arreterEnregistrement();
         onTermine && onTermine();
       }
     });
@@ -113,6 +181,8 @@ export default function TeleprompterPlayer({
   const recommencer = () => {
     animationRef.current && animationRef.current.stop();
     scrollY.setValue(0);
+    setRecordingUri(null);
+    setEnregistrement('inactif');
     setPhase('respiration');
   };
 
@@ -201,6 +271,17 @@ export default function TeleprompterPlayer({
           <Text style={styles.respirationTexte}>
             Bien joué. Comment te sentais-tu en lisant ?
           </Text>
+          {(enregistrement === 'pret' || enregistrement === 'lecture_audio') && (
+            <Pressable
+              style={styles.boutonPrincipal}
+              onPress={ecouterEnregistrement}
+              disabled={enregistrement === 'lecture_audio'}
+            >
+              <Text style={styles.boutonPrincipalTexte}>
+                {enregistrement === 'lecture_audio' ? 'Lecture en cours…' : '▶ Réécouter ma lecture'}
+              </Text>
+            </Pressable>
+          )}
           {/* Le check-in de ressenti est géré par l'écran parent (DayScreen) */}
           <Pressable style={styles.boutonSecondaire} onPress={recommencer}>
             <Text style={styles.boutonSecondaireTexte}>Relire une fois de plus</Text>

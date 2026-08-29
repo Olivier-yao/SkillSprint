@@ -15,6 +15,9 @@ texte à voix haute à l'utilisateur, avec :
 - des marqueurs `/` (pause courte) et `//` (pause longue) dans les textes
   pour travailler le rythme
 - un check-in de ressenti après la lecture (Confiant·e / Stressé·e / Neutre / Fier·e)
+- un enregistrement audio (`expo-av`) de la lecture, avec réécoute possible
+  juste après (dégrade proprement si le micro n'est pas accessible — l'exercice
+  reste utilisable sans)
 
 ## Structure du projet
 
@@ -45,11 +48,15 @@ tester dans le navigateur.
 
 ## Prochaines étapes suggérées
 
-1. Compléter le contenu des jours 2 à 7 du sprint "Écoute active" (actuellement
-   un seul jour rempli à titre d'exemple).
-2. Ajouter un vrai enregistrement audio (expo-av) pour que l'utilisateur
-   puisse se réécouter après une session de télé-prompteur — actuellement
-   l'exercice reste en lecture guidée sans enregistrement, pour rester simple
-   et rapide à livrer en MVP.
+1. ~~Compléter le contenu des jours 2 à 7 du sprint "Écoute active"~~ — fait.
+2. ~~Enregistrement audio (expo-av) pour se réécouter après le télé-prompteur~~ —
+   fait. Testé en navigateur sur le chemin "micro indisponible" (dégradation
+   propre) ; le chemin d'enregistrement réel nécessite un test sur appareil
+   (Expo Go) ou navigateur avec accès micro, pas encore fait.
 3. Ajouter les notifications de rappel quotidien (expo-notifications).
 4. Sprints collaboratifs (fonctionnalité "wow" identifiée en discovery).
+5. Maquettes Claude Design ("SkillSprint Maquettes") pas encore importées —
+   voir note dans le dernier commit / message à l'utilisateur : accès bloqué
+   par l'auth (`/design-login` non disponible en session non-interactive,
+   extension Claude in Chrome non connectée). À reprendre dès qu'une des deux
+   voies d'accès est débloquée.
