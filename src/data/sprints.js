@@ -25,7 +25,7 @@ export const SPRINTS = [
         consigne:
           "Avant de lire, inspire lentement 4 secondes, retiens 2 secondes, expire 6 secondes. Puis lis le texte à voix haute, à ton rythme, sans te presser.",
         text:
-          "Je prends un instant, / avant de parler. // Ma voix n'a pas besoin d'être parfaite, / elle a besoin d'être claire. // Je respire, / je pose mes mots, / un par un. // Ce que je dis compte, / même si ma voix tremble un peu au début.",
+          "Je prends un instant, / avant de parler. // Ma voix n'a pas besoin d'être parfaite, / elle a besoin d'être claire. // Je respire, / je pose mes mots, / un par un. // Ce que je dis compte, / même si ma voix tremble un peu au début. // Avant de commencer, / je laisse mes épaules descendre. // Je ne cherche pas à impressionner, / je cherche juste à être entendu·e. // Une voix calme / n'est pas une voix forte, / c'est une voix qui prend son temps. // Je peux parler lentement, / personne ne va s'impatienter. // Le silence entre mes phrases / n'est pas une faiblesse, / c'est de l'espace pour que mes mots respirent. // Si je perds le fil, / je m'arrête, / je respire, / et je reprends où j'en étais. // Ce n'est pas grave. // Chaque prise de parole / est une occasion de m'entraîner, / pas un examen à réussir du premier coup. // Je suis ici, / debout ou assis·e, / et j'ai le droit de prendre la place / que ma voix mérite. // C'est tout ce qu'il faut retenir / avant de commencer à parler : / respirer, / ralentir, / et faire confiance à ce que j'ai à dire.",
         vitesseParDefaut: 1,
       },
       {
@@ -36,7 +36,7 @@ export const SPRINTS = [
         consigne:
           "Exagère volontairement l'ouverture de ta bouche sur chaque syllabe. L'objectif n'est pas la vitesse mais la clarté.",
         text:
-          "Six chaises sèchent chez ces charmantes sœurs suisses. / Trois gros rats gris grattent trois gros tapis gras. // Je parle lentement, / j'articule chaque syllabe, / comme si chaque mot comptait vraiment.",
+          "Six chaises sèchent chez ces charmantes sœurs suisses. / Trois gros rats gris grattent trois gros tapis gras. // Un chasseur sachant chasser doit savoir chasser sans son chien. / Si six scies scient six cyprès, / six cent six scies scient six cent six cyprès. // Je parle lentement, / j'articule chaque syllabe, / comme si chaque mot comptait vraiment. // Ma bouche s'ouvre plus que d'habitude, / mes lèvres travaillent, / ma langue touche mes dents sur chaque consonne. // Didon dîna, dit-on, du dos d'un dodu dindon. / Un dragon gradé dégrade un gradé dragon. // Je ne cherche pas la vitesse, / je cherche la netteté. // Chaque syllabe a sa place, / chaque mot mérite d'être entendu clairement, / du début à la fin. // Si je m'emmêle, / je ralentis encore, / je reprends la phrase, / sans stress. // L'articulation, / ça se muscle / comme un geste qu'on répète, / jusqu'à ce qu'il devienne naturel.",
         vitesseParDefaut: 0.8,
       },
       {
@@ -54,7 +54,7 @@ export const SPRINTS = [
         consigne:
           "Ralentis sur les passages importants, accélère légèrement sur les transitions. Laisse les silences (/) exister vraiment.",
         text:
-          "Il y a des phrases / qu'il faut dire lentement. // Et d'autres, plus légères, qui peuvent filer plus vite, sans s'arrêter. / Le silence, / n'est pas un vide à combler, / c'est un outil.",
+          "Il y a des phrases / qu'il faut dire lentement. // Elles portent quelque chose d'important, / et elles ont besoin d'espace pour qu'on les entende vraiment. // Et d'autres, plus légères, / qui peuvent filer plus vite, / sans s'arrêter, / comme une respiration naturelle dans la conversation. // Le silence, / n'est pas un vide à combler. / C'est un outil. // Un silence bien placé / attire l'attention / bien mieux qu'un mot de plus. // Je peux ralentir / juste avant l'idée la plus importante, / pour que mon auditoire se penche un peu en avant, / sans même s'en rendre compte. // Et je peux accélérer / sur les détails, / sur les transitions, / sur ce qui compte un peu moins, / pour garder l'attention en mouvement. // Varier le rythme, / ce n'est pas une technique compliquée. / C'est juste écouter / ce que chaque phrase a besoin de dire, / et lui donner le temps / — ou la vitesse — / qui lui correspond. // Une voix qui varie / est une voix vivante. / Une voix qui reste toujours pareille / finit par se faire oublier.",
         vitesseParDefaut: 1,
       },
       {
@@ -72,7 +72,7 @@ export const SPRINTS = [
         consigne:
           "Lis ce texte en imaginant que tu es un peu stressé. Le but : continuer à articuler et respirer même si la voix tremble un peu.",
         text:
-          "Mon cœur bat un peu plus vite, / et c'est normal. // Le stress n'est pas mon ennemi, / c'est juste de l'énergie mal placée. // Je respire, / je continue à parler, / une phrase à la fois. // Je n'ai pas besoin d'être calme pour être clair.",
+          "Mon cœur bat un peu plus vite, / et c'est normal. // Mes mains sont peut-être moites, / ma voix hésite peut-être sur le premier mot. // Rien de tout ça / n'empêche ce que j'ai à dire d'être vrai / et d'avoir de la valeur. // Le stress n'est pas mon ennemi, / c'est juste de l'énergie mal placée. // Cette énergie, / je peux la mettre dans mes mots / plutôt que la laisser bloquer ma gorge. // Je respire, / je continue à parler, / une phrase à la fois. // Je ne suis pas obligé·e d'avoir toutes les réponses / ni de parler sans la moindre hésitation. // Je n'ai pas besoin d'être calme / pour être clair. // Je peux trembler un peu / et quand même me faire comprendre. // Les gens en face de moi / ne cherchent pas la perfection, / ils cherchent quelqu'un de sincère. // Alors je garde mes pieds bien ancrés, / je garde ma respiration lente, / et je laisse ma voix sortir, / même imparfaite, / même un peu tremblante. // C'est ça, / parler malgré le stress : / pas l'effacer, / juste avancer avec.",
         vitesseParDefaut: 0.9,
       },
       {
@@ -158,7 +158,7 @@ export const SPRINTS = [
         consigne:
           "Suis le rythme : inspire 4 secondes, retiens 4, expire 4, retiens 4. Lis le texte en calant tes mots sur ce rythme, sans te presser.",
         text:
-          "J'inspire, / je compte jusqu'à quatre. // Je retiens, / un temps de pause. // J'expire, / je laisse partir. // Et je recommence, / aussi souvent qu'il le faut.",
+          "J'inspire, / je compte jusqu'à quatre. // Un, / deux, / trois, / quatre. // Je retiens, / un temps de pause. // Un, / deux, / trois, / quatre. // J'expire, / je laisse partir. // Un, / deux, / trois, / quatre. // Je retiens à nouveau, / poumons vides, / calme. // Un, / deux, / trois, / quatre. // Et je recommence, / aussi souvent qu'il le faut. // Ce carré de respiration / n'a pas besoin d'être parfait. / Il a juste besoin d'être répété. // À chaque cycle, / mes épaules descendent un peu plus. / Mes pensées ralentissent, / même si elles ne s'arrêtent pas complètement. // Ce n'est pas grave. // Je ne cherche pas à vider ma tête. / Je cherche juste à donner à mon corps / un rythme plus lent / que celui de mon stress. // Quatre temps pour inspirer, / quatre temps pour retenir, / quatre temps pour expirer, / quatre temps pour faire une pause. // Un carré simple, / que je peux emporter partout, / même sans ce texte sous les yeux.",
         vitesseParDefaut: 0.8,
       },
       {
@@ -176,7 +176,7 @@ export const SPRINTS = [
         consigne:
           "Pendant que tu lis, sens vraiment tes pieds au sol et tes mains posées. C'est ça, l'ancrage.",
         text:
-          "Mes pieds touchent le sol. // Mes mains sont posées, / immobiles. // Je sens le poids de mon corps, / ici, / maintenant. // Le stress est dans ma tête, / mon corps, lui, / est déjà calme.",
+          "Mes pieds touchent le sol. // Je sens le contact, / le poids qui descend, / la stabilité qui vient d'en bas. // Mes mains sont posées, / immobiles. // Je sens leur température, / leur poids, / la texture de ce qu'elles touchent. // Je remarque cinq choses que je peux voir autour de moi. / Je ne les juge pas, / je les remarque, / simplement. // Je remarque quatre choses que je peux entendre. / Un bruit lointain, / peut-être ma propre respiration. // Je remarque trois choses que je peux sentir / sous mes doigts, / sous mes pieds, / contre mon dos. // Je sens le poids de mon corps, / ici, / maintenant. // Pas hier, / pas demain. / Ici. // Le stress est dans ma tête. / Il parle de choses passées / ou de choses qui n'arrivent pas encore. // Mon corps, lui, / est déjà calme. / Il n'a pas besoin d'attendre / que ma tête se calme aussi. // Je peux commencer par lui, / et laisser le reste suivre, / doucement.",
         vitesseParDefaut: 0.9,
       },
       {
@@ -194,7 +194,7 @@ export const SPRINTS = [
         consigne:
           "Lis ce texte comme si tu te parlais à toi-même, avec douceur, pas avec dureté.",
         text:
-          "Mon stress n'est pas mon ennemi. // Il essaie juste de me protéger, / maladroitement. // Je peux lui dire merci, / et respirer quand même. // Je n'ai pas besoin qu'il disparaisse / pour avancer.",
+          "Mon stress n'est pas mon ennemi. // Il essaie juste de me protéger, / maladroitement, / comme un ami un peu trop nerveux / qui veut bien faire. // Il pense que s'il m'alerte assez fort, / je serai prêt·e pour n'importe quoi. // Mais parfois, / il en fait trop, / et il m'épuise avant même que la difficulté n'arrive. // Je peux lui dire merci, / et respirer quand même. // Merci d'essayer de me protéger, / mais je n'ai pas besoin de toute cette alarme / pour ce moment précis. // Je n'ai pas besoin qu'il disparaisse / pour avancer. // Je peux avancer avec lui à côté de moi, / un peu bruyant, / mais pas aux commandes. // Je respire, / je pose une main sur ma poitrine / si ça m'aide à sentir que je suis là, / présent·e, / entier·e. // Le stress va et vient. / Il n'est pas moi. / Il est juste une vague / qui traverse un corps / qui, lui, / reste debout.",
         vitesseParDefaut: 0.9,
       },
       {
