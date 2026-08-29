@@ -55,8 +55,17 @@ tester dans le navigateur.
    (Expo Go) ou navigateur avec accès micro, pas encore fait.
 3. Ajouter les notifications de rappel quotidien (expo-notifications).
 4. Sprints collaboratifs (fonctionnalité "wow" identifiée en discovery).
-5. Maquettes Claude Design ("SkillSprint Maquettes") pas encore importées —
-   voir note dans le dernier commit / message à l'utilisateur : accès bloqué
-   par l'auth (`/design-login` non disponible en session non-interactive,
-   extension Claude in Chrome non connectée). À reprendre dès qu'une des deux
-   voies d'accès est débloquée.
+5. ~~Importer les maquettes Claude Design~~ — fait (accès débloqué via export
+   HTML manuel de l'utilisateur, cf. commit "Apply Claude Design maquettes").
+   Appliqué : accueil (carte "aujourd'hui" + liste), détail sprint (liste des
+   7 jours, bouton "Refaire le sprint"), bande du télé-prompteur (repères
+   latéraux au lieu des filets pleine largeur), et un vrai bug corrigé au
+   passage (le défilement finissait sur du vide au lieu de montrer la
+   dernière ligne).
+6. Onboarding — la maquette propose 2 directions distinctes (accroche+règles
+   vs. choix direct de compétence) : à trancher avec l'utilisateur avant de
+   coder, ça change le flux de navigation.
+7. Profil / historique des ressentis — la maquette le prévoit, mais ça
+   suppose de persister `ressenti` + `reflexion` par jour (actuellement
+   `marquerJourComplete` dans App.js ne garde que `jourActuel`, le reste est
+   jeté). Chantier de données + écran, à cadrer avant de lancer.
