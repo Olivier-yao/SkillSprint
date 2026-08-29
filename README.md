@@ -29,12 +29,23 @@ skillsprint/
 │   ├── data/sprints.js            # contenu éditorial des sprints (à enrichir)
 │   ├── components/
 │   │   ├── ProgressRing.js
+│   │   ├── icons.js               # icônes de la barre d'onglets
 │   │   └── TeleprompterPlayer.js  # composant clé de lecture vocale
 │   └── screens/
+│       ├── OnboardingScreen.js    # premier lancement uniquement
 │       ├── HomeScreen.js
 │       ├── SprintDetailScreen.js
+│       ├── ProfilScreen.js        # onglet "Profil" — carnet minimal
 │       └── DayScreen.js           # bascule mission classique / teleprompter
 ```
+
+## Navigation
+
+Premier lancement : `OnboardingScreen` (choix d'un sprint), affiché tant que
+`@skillsprint_onboarde` n'est pas en storage. Ensuite : une barre d'onglets
+(`Accueil` / `Profil`) — l'onglet Accueil contient la pile Home → SprintDetail
+→ Day comme avant. Choisir un sprint pendant l'onboarding ouvre directement
+son détail au premier lancement de l'onglet Accueil.
 
 ## Lancer le projet
 
@@ -62,14 +73,21 @@ tester dans le navigateur.
    latéraux au lieu des filets pleine largeur), et un vrai bug corrigé au
    passage (le défilement finissait sur du vide au lieu de montrer la
    dernière ligne).
-6. Onboarding — la maquette propose 2 directions distinctes (accroche+règles
-   vs. choix direct de compétence) : à trancher avec l'utilisateur avant de
-   coder, ça change le flux de navigation.
-7. Profil / historique des ressentis — la maquette le prévoit, mais ça
-   suppose de persister `ressenti` + `reflexion` par jour (actuellement
-   `marquerJourComplete` dans App.js ne garde que `jourActuel`, le reste est
-   jeté). Chantier de données + écran, à cadrer avant de lancer.
-8. ~~Refonte de l'identité visuelle~~ — fait. La première identité (fond
+6. ~~Onboarding~~ — fait. Direction "choix direct de compétence" (maquette 1m) :
+   au tout premier lancement, on choisit un sprint et on entre directement
+   dans son détail. Pas de tunnel à rallonge. Flag persisté dans
+   `@skillsprint_onboarde`.
+7. ~~Navigation par barre d'onglets~~ — fait. `Accueil` (pile Home →
+   SprintDetail → Day, comme avant) et `Profil` (nouvel onglet).
+8. Profil / historique des ressentis — l'onglet `ProfilScreen` actuel est
+   volontairement minimal et honnête : total de jours entraînés + statut par
+   sprint, calculés depuis `progression` (pas de séries/dates inventées, on
+   ne les a pas). Pour aller plus loin (jours consécutifs, historique des
+   ressentis par jour comme en 1o) il faudrait persister `ressenti` +
+   `reflexion` + une date par jour complété — actuellement
+   `marquerJourComplete` dans App.js ne garde que `jourActuel`. Chantier de
+   données à cadrer avant de lancer.
+9. ~~Refonte de l'identité visuelle~~ — fait. La première identité (fond
    encre bleu-nuit, ambre/teal, Fraunces/Work Sans/Literata) a été jugée
    trop générique. Remplacée par la direction "Graphique audacieux" choisie
    parmi 3 propositions : fond presque-blanc, indigo saturé (`#362FE0`) en

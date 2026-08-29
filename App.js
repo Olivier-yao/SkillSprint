@@ -1,6 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   useFonts,
   BricolageGrotesque_600SemiBold,
@@ -14,13 +16,94 @@ import {
 } from '@expo-google-fonts/archivo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import OnboardingScreen from './src/screens/OnboardingScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import SprintDetailScreen from './src/screens/SprintDetailScreen';
 import DayScreen from './src/screens/DayScreen';
-import { colors } from './src/theme/theme';
+import ProfilScreen from './src/screens/ProfilScreen';
+import { IconAccueil, IconProfil } from './src/components/icons';
+import { colors, typography } from './src/theme/theme';
 
-const Stack = createNativeStackNavigator();
+const AccueilStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+const RootStack = createNativeStackNavigator();
+
 const STORAGE_KEY = '@skillsprint_progression';
+const ONBOARDING_KEY = '@skillsprint_onboarde';
+
+function AccueilStackScreen({ progression, onCompleter, onRefaireSprint, sprintInitial }) {
+  return (
+    <AccueilStack.Navigator
+      screenOptions={{ headerShown: false }}
+      initialRouteName={sprintInitial ? 'SprintDetail' : 'Home'}
+    >
+      <AccueilStack.Screen name="Home">
+        {(props) => <HomeScreen {...props} progression={progression} />}
+      </AccueilStack.Screen>
+      <AccueilStack.Screen
+        name="SprintDetail"
+        initialParams={sprintInitial ? { sprintId: sprintInitial } : undefined}
+      >
+        {(props) => (
+          <SprintDetailScreen {...props} progression={progression} onRefaireSprint={onRefaireSprint} />
+        )}
+      </AccueilStack.Screen>
+      <AccueilStack.Screen name="Day">
+        {(props) => (
+          <DayScreen
+            {...props}
+            onCompleter={({ jour }) => {
+              const { sprintId } = props.route.params;
+              onCompleter(sprintId, jour);
+              props.navigation.navigate('SprintDetail', { sprintId });
+            }}
+          />
+        )}
+      </AccueilStack.Screen>
+    </AccueilStack.Navigator>
+  );
+}
+
+function MainTabs({ progression, onCompleter, onRefaireSprint, sprintInitial }) {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: colors.accentIndigo,
+        tabBarInactiveTintColor: colors.textMuted,
+        tabBarStyle: {
+          backgroundColor: colors.surface,
+          borderTopColor: colors.ink,
+          borderTopWidth: 2,
+          height: 64,
+          paddingTop: 8,
+          paddingBottom: 10,
+        },
+        tabBarLabelStyle: { fontFamily: typography.bodyBold, fontSize: 11 },
+      }}
+    >
+      <Tab.Screen
+        name="Accueil"
+        options={{ tabBarIcon: ({ color }) => <IconAccueil color={color} /> }}
+      >
+        {() => (
+          <AccueilStackScreen
+            progression={progression}
+            onCompleter={onCompleter}
+            onRefaireSprint={onRefaireSprint}
+            sprintInitial={sprintInitial}
+          />
+        )}
+      </Tab.Screen>
+      <Tab.Screen
+        name="Profil"
+        options={{ tabBarIcon: ({ color }) => <IconProfil color={color} /> }}
+      >
+        {() => <ProfilScreen progression={progression} />}
+      </Tab.Screen>
+    </Tab.Navigator>
+  );
+}
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -33,10 +116,15 @@ export default function App() {
   });
 
   const [progression, setProgression] = useState({});
+  const [onboarde, setOnboarde] = useState(null); // null = pas encore su
+  const [sprintInitial, setSprintInitial] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     AsyncStorage.getItem(STORAGE_KEY).then((data) => {
       if (data) setProgression(JSON.parse(data));
+    });
+    AsyncStorage.getItem(ONBOARDING_KEY).then((v) => {
+      setOnboarde(v === 'true');
     });
   }, []);
 
@@ -57,48 +145,52 @@ export default function App() {
     });
   }, []);
 
-  if (!fontsLoaded) return null;
+  const terminerOnboarding = useCallback((sprintIdChoisi) => {
+    AsyncStorage.setItem(ONBOARDING_KEY, 'true');
+    setSprintInitial(sprintIdChoisi);
+    setOnboarde(true);
+  }, []);
+
+  if (!fontsLoaded || onboarde === null) return null;
+
+  // L'onboarding n'a pas besoin de navigation propre — un simple écran
+  // affiché avant de monter le NavigationContainer.
+  if (!onboarde) {
+    return (
+      <SafeAreaProvider>
+        <OnboardingScreen onTerminer={terminerOnboarding} />
+      </SafeAreaProvider>
+    );
+  }
 
   return (
-    <NavigationContainer
-      theme={{
-        dark: false,
-        colors: {
-          background: colors.bg,
-          card: colors.bg,
-          text: colors.ink,
-          border: colors.divider,
-          primary: colors.accentIndigo,
-          notification: colors.accentOrange,
-        },
-      }}
-    >
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home">
-          {(props) => <HomeScreen {...props} progression={progression} />}
-        </Stack.Screen>
-        <Stack.Screen name="SprintDetail">
-          {(props) => (
-            <SprintDetailScreen
-              {...props}
-              progression={progression}
-              onRefaireSprint={remettreSprintAZero}
-            />
-          )}
-        </Stack.Screen>
-        <Stack.Screen name="Day">
-          {(props) => (
-            <DayScreen
-              {...props}
-              onCompleter={({ jour }) => {
-                const { sprintId } = props.route.params;
-                marquerJourComplete(sprintId, jour);
-                props.navigation.navigate('SprintDetail', { sprintId });
-              }}
-            />
-          )}
-        </Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer
+        theme={{
+          dark: false,
+          colors: {
+            background: colors.bg,
+            card: colors.bg,
+            text: colors.ink,
+            border: colors.divider,
+            primary: colors.accentIndigo,
+            notification: colors.accentOrange,
+          },
+        }}
+      >
+        <RootStack.Navigator screenOptions={{ headerShown: false }}>
+          <RootStack.Screen name="Main">
+            {() => (
+              <MainTabs
+                progression={progression}
+                onCompleter={marquerJourComplete}
+                onRefaireSprint={remettreSprintAZero}
+                sprintInitial={sprintInitial}
+              />
+            )}
+          </RootStack.Screen>
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
