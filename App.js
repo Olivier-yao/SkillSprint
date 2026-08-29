@@ -42,6 +42,14 @@ export default function App() {
     });
   }, []);
 
+  const remettreSprintAZero = useCallback((sprintId) => {
+    setProgression((prev) => {
+      const next = { ...prev, [sprintId]: { jourActuel: 0 } };
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      return next;
+    });
+  }, []);
+
   if (!fontsLoaded) return null;
 
   return (
@@ -63,7 +71,13 @@ export default function App() {
           {(props) => <HomeScreen {...props} progression={progression} />}
         </Stack.Screen>
         <Stack.Screen name="SprintDetail">
-          {(props) => <SprintDetailScreen {...props} progression={progression} />}
+          {(props) => (
+            <SprintDetailScreen
+              {...props}
+              progression={progression}
+              onRefaireSprint={remettreSprintAZero}
+            />
+          )}
         </Stack.Screen>
         <Stack.Screen name="Day">
           {(props) => (

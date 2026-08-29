@@ -197,20 +197,24 @@ export default function TeleprompterPlayer({
       )}
 
       <View style={styles.promptContainer}>
-        <Animated.View
-          style={{ transform: [{ translateY: scrollY }] }}
-          onLayout={(e) => {
-            textHeightRef.current = e.nativeEvent.layout.height;
-          }}
-        >
+        <Animated.View style={{ transform: [{ translateY: scrollY }] }}>
           <View style={{ height: CONTAINER_HEIGHT / 2 - BAND_HEIGHT / 2 }} />
-          <Text style={styles.readingText}>
-            {segments.map((seg, i) => {
-              if (seg === '/') return <Text key={i}> ‧ </Text>;
-              if (seg === '//') return <Text key={i}>{'\n\n'}</Text>;
-              return <Text key={i}>{seg} </Text>;
-            })}
-          </Text>
+          <View
+            onLayout={(e) => {
+              // Hauteur du texte seul (sans les marges), pour que le
+              // défilement s'arrête pile quand la dernière ligne atteint
+              // la bande — pas après, sous peine de finir sur du vide.
+              textHeightRef.current = e.nativeEvent.layout.height;
+            }}
+          >
+            <Text style={styles.readingText}>
+              {segments.map((seg, i) => {
+                if (seg === '/') return <Text key={i}> ‧ </Text>;
+                if (seg === '//') return <Text key={i}>{'\n\n'}</Text>;
+                return <Text key={i}>{seg} </Text>;
+              })}
+            </Text>
+          </View>
           <View style={{ height: CONTAINER_HEIGHT / 2 }} />
         </Animated.View>
 
@@ -226,8 +230,9 @@ export default function TeleprompterPlayer({
           pointerEvents="none"
         />
 
-        {/* Bande de focus */}
-        <View style={styles.bandeFocus} pointerEvents="none" />
+        {/* Bande de focus — repères latéraux, sans ligne en travers du texte */}
+        <View style={[styles.repereFocus, styles.repereFocusGauche]} pointerEvents="none" />
+        <View style={[styles.repereFocus, styles.repereFocusDroit]} pointerEvents="none" />
       </View>
 
       {phase === 'respiration' && (
@@ -323,16 +328,16 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  bandeFocus: {
+  repereFocus: {
     position: 'absolute',
-    left: 0,
-    right: 0,
     top: CONTAINER_HEIGHT / 2 - BAND_HEIGHT / 2,
     height: BAND_HEIGHT,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: colors.accentAmberDim,
+    width: 3,
+    borderRadius: 2,
+    backgroundColor: colors.accentAmberDim,
   },
+  repereFocusGauche: { left: spacing.sm },
+  repereFocusDroit: { right: spacing.sm },
   respirationBloc: {
     alignItems: 'center',
     marginTop: spacing.lg,
