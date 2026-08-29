@@ -64,7 +64,12 @@ tester dans le navigateur.
    fait. Testé en navigateur sur le chemin "micro indisponible" (dégradation
    propre) ; le chemin d'enregistrement réel nécessite un test sur appareil
    (Expo Go) ou navigateur avec accès micro, pas encore fait.
-3. Ajouter les notifications de rappel quotidien (expo-notifications).
+3. ~~Notifications de rappel quotidien~~ — fait. Réglage dans l'onglet
+   Profil (interrupteur + choix de l'heure parmi 8h/12h/19h/21h), rappel
+   global — pas par sprint. Testé en navigateur sur le chemin "permission
+   refusée" (dégradation propre, message explicite) ; la planification
+   réelle (`Notifications.scheduleNotificationAsync`) nécessite un test sur
+   appareil, pas encore fait.
 4. Sprints collaboratifs (fonctionnalité "wow" identifiée en discovery).
 5. ~~Importer les maquettes Claude Design~~ — fait (accès débloqué via export
    HTML manuel de l'utilisateur, cf. commit "Apply Claude Design maquettes").
