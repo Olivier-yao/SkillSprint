@@ -15,6 +15,7 @@ import {
   Archivo_700Bold,
 } from '@expo-google-fonts/archivo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { enregistrerCompletionGroupe } from './src/lib/groupe';
 
 import OnboardingScreen from './src/screens/OnboardingScreen';
 import HomeScreen from './src/screens/HomeScreen';
@@ -155,6 +156,7 @@ export default function App() {
       AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
       return next;
     });
+    enregistrerCompletionGroupe(sprintId, jourNumero).catch(() => {});
   }, []);
 
   const remettreSprintAZero = useCallback((sprintId) => {

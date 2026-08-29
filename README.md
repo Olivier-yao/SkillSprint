@@ -70,14 +70,24 @@ tester dans le navigateur.
    refusée" (dégradation propre, message explicite) ; la planification
    réelle (`Notifications.scheduleNotificationAsync`) nécessite un test sur
    appareil, pas encore fait.
-4. Sprints collaboratifs (fonctionnalité "wow" identifiée en discovery).
-   Pas commencé — contrairement au reste de cette liste, ça ne se scope pas
-   sans discussion : l'app est 100% locale aujourd'hui (AsyncStorage, pas de
-   compte, pas de serveur), donc "collaboratif" implique un vrai backend
-   (lequel ?), de l'authentification, et une définition précise de ce que ça
-   veut dire concrètement (même sprint à plusieurs ? comparer sa progression
-   avec des amis ? chat ?). À cadrer avec l'utilisateur avant de coder quoi
-   que ce soit.
+4. ~~Sprints collaboratifs~~ — fait. Défini avec l'utilisateur : faire le
+   même sprint à plusieurs, sans compte. Nouveau projet Supabase dédié
+   (`skillsprint`, région eu-west-1, palier gratuit) avec 3 tables
+   (`groupes`, `participants`, `completions`, RLS activée, migrations
+   `sprints_groupe` + `completions_groupe_id`). Chaque appareil a un
+   identifiant local (pas d'auth) ; le code de groupe à 6 caractères fait
+   office de secret partagé — adapté à un usage entre amis, pas à des
+   données sensibles (à documenter clairement si l'app grandit). Sur
+   `SprintDetailScreen`, nouvelle carte `GroupeSprint` : créer/rejoindre un
+   groupe, voir qui a fait quoi (grille de coches par participant/jour) via
+   Supabase Realtime. `marquerJourComplete` pousse la completion au groupe
+   si l'appareil en a un pour ce sprint.
+
+   Testé en conditions réelles avec deux onglets simulant deux appareils
+   (identifiants locaux différents) : création de groupe, jonction par
+   code, complétion d'un jour au télé-prompteur → la coche apparaît en
+   direct sur l'autre appareil sans rafraîchir. Aucune erreur console.
+   Donnée de test nettoyée de la base après vérification.
 5. ~~Importer les maquettes Claude Design~~ — fait (accès débloqué via export
    HTML manuel de l'utilisateur, cf. commit "Apply Claude Design maquettes").
    Appliqué : accueil (carte "aujourd'hui" + liste), détail sprint (liste des

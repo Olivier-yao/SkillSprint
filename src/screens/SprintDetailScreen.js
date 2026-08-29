@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native';
 import { getSprintById } from '../data/sprints';
 import ProgressRing from '../components/ProgressRing';
+import GroupeSprint from '../components/GroupeSprint';
 import { colors, typography, spacing, radius } from '../theme/theme';
 
 export default function SprintDetailScreen({ route, navigation, progression = {}, onRefaireSprint }) {
@@ -85,6 +86,8 @@ export default function SprintDetailScreen({ route, navigation, progression = {}
           );
         })}
       </View>
+
+      <GroupeSprint sprintId={sprintId} sprintTitre={sprint.titre} duree={sprint.duree} />
     </ScrollView>
   );
 }
